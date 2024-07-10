@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('css/app') }}
+        {% endblock %}
+    </head>
+    <body>
+        
+        <section class="form">
+            <form action="/" method="GET">
+                {% if error is defined and error %}
+                    <p class="error">Not valid url</p>
+                {% endif %}
+                <input class="{{ error is defined and error ? 'error' : '' }}" placeholder="Введите URL" name="q" value="{{ q }}" required />
+                
+                <button type="submit" title="Go">Go</button>
+            </form>
+
+            {% if images is not empty %}
+                <div class="grid">
+                    {% for image in images %}
+                        <img src="{{ image }}" alt="image">
+                    {% endfor %}
+                </div>
+
+                <span class="count">Total images: {{ images|length }}</span>
+                <span class="size">Total size: <span></span> mb</span>
+            {% endif %}
+        </section>
+
+
+        {{ encore_entry_script_tags('js/app') }}
+    </body>
+</html>
